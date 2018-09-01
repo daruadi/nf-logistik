@@ -96,6 +96,7 @@ class Produk extends CI_Controller {
 		}
 		else
 		{
+			$data['id'] = $id;
 			$data['PREFIX_BARCODE'] = self::PREFIX_BARCODE;
 			$data['produk'] = $this->produk_model->get_by_id($id);
 			$data['barangs'] = $this->barang_model->get_list_dropdown();

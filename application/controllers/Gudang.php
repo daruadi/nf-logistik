@@ -86,6 +86,7 @@ class Gudang extends CI_Controller {
 		}
 		else
 		{
+			$data['id'] = $id;
 			$data['gudang'] = $this->gudang_model->get_by_id($id);
 
 			if(count($data['gudang']) < 1)

@@ -83,6 +83,7 @@ class Merk extends CI_Controller {
 		}
 		else
 		{
+			$data['id'] = $id;
 			$data['merk'] = $this->merk_model->get_by_id($id);
 
 			if(count($data['merk']) < 1)

@@ -83,6 +83,7 @@ class Barang extends CI_Controller {
 		}
 		else
 		{
+			$data['id'] = $id;
 			$data['barang'] = $this->barang_model->get_by_id($id);
 
 			if(count($data['barang']) < 1)

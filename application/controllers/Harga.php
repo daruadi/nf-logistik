@@ -75,6 +75,7 @@ class Harga extends CI_Controller
 		}
 		else
 		{
+			$data['id'] = $id;
 			$data['harga'] = $this->harga_model->get_by_id($id);
 
 			if(count($data['harga']) < 1)
