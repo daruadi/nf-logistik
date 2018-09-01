@@ -83,6 +83,7 @@ class Unit extends CI_Controller {
 		}
 		else
 		{
+			$data['id'] = $id;
 			$data['unit'] = $this->unit_model->get_by_id($id);
 
 			if(count($data['unit']) < 1)
