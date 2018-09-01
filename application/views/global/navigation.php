@@ -11,12 +11,12 @@
           <span class="nav-link-text">Dashboard</span>
         </a>
       </li>
-      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Charts">
+      <!-- <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Charts">
         <a class="nav-link" href="charts.html">
           <i class="fa fa-fw fa-area-chart"></i>
           <span class="nav-link-text">Charts</span>
         </a>
-      </li>
+      </li> -->
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Data Acuan">
         <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseDataAcuan" data-parent="#exampleAccordion">
           <i class="fa fa-fw fa-archive"></i>
