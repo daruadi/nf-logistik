@@ -1,12 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Unit extends CI_Controller {
+class Unit extends MY_Controller {
 
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load->model('unit_model');
+		$this->breadcrumb_menu['Unit'] = base_url('/unit');
 	}
 
 	/**
@@ -15,6 +16,7 @@ class Unit extends CI_Controller {
 	 */
 	public function index()
 	{
+		$data['breadcrumb'] = $this->render_breadcrumb($this->breadcrumb_menu);
 		$sort = strtolower($this->input->get('sort')) == 'desc' ? 'desc' : 'asc';
 		$data['units'] = $this->unit_model->get_all($sort);
 		$this->load->view('global/header', $data);
@@ -28,14 +30,16 @@ class Unit extends CI_Controller {
 	 */
 	public function tambah()
 	{
-		$data['max_name_length'] = unit_model::MAX_NAME_LENGTH;
+		$this->breadcrumb_menu['Tambah Unit'] = base_url('/unit/tambah');
+		$data['breadcrumb'] = $this->render_breadcrumb($this->breadcrumb_menu);
 
 		$this->form_validation->set_rules($this->unit_model->get_rules());
 
 		if($this->form_validation->run())
 		{
 			$nama = $this->input->post('nama');
-			$inserted = $this->unit_model->insert($nama);
+			$kode = $this->input->post('kode');
+			$inserted = $this->unit_model->insert($nama, $kode);
 			if($inserted > 0)
 			{
 				redirect('unit/?sort=desc');
@@ -63,13 +67,17 @@ class Unit extends CI_Controller {
 	 */
 	public function ubah($id)
 	{
+		$this->breadcrumb_menu['Ubah Unit'] = base_url('/unit/ubah');
+		$data['breadcrumb'] = $this->render_breadcrumb($this->breadcrumb_menu);
+
 		$this->form_validation->set_rules($this->unit_model->get_rules());
 
 		if($this->form_validation->run())
 		{
 			$id = intval($this->input->post('id'));
 			$nama = $this->input->post('nama');
-			$updated = $this->unit_model->update($id, $nama);
+			$kode = $this->input->post('kode');
+			$updated = $this->unit_model->update($id, $nama, $kode);
 			
 			if($updated > 0)
 			{
@@ -93,7 +101,6 @@ class Unit extends CI_Controller {
 			}
 			else
 			{
-				$data['max_name_length'] = unit_model::MAX_NAME_LENGTH;
 				$view = 'unit/form';
 			}
 		}

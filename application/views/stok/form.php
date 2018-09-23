@@ -1,3 +1,4 @@
+<?php echo $breadcrumb; ?>
 <div class="card-header">
 	<i class="fa fa-table"></i>
 	<?php
