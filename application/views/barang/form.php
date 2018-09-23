@@ -1,4 +1,4 @@
-<a href="<?php echo base_url('/barang');?>">Kembali ke daftar</a>
+<?php echo $breadcrumb; ?>
 <div class="card-header">
 	<i class="fa fa-table"></i>
 	<?php

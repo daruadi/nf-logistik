@@ -9,12 +9,24 @@ class Merk extends CI_Controller {
 		$this->load->model('merk_model');
 	}
 
+	private function render_breadcrumb($page_name = '', $href = '')
+	{
+		$this->mybreadcrumb->add('Home', base_url());
+		$this->mybreadcrumb->add('Merk', base_url('/merk'));
+		if(!empty($page_name) && !empty($href)){
+			$this->mybreadcrumb->add($page_name, $href);
+		}
+
+		return $this->mybreadcrumb->render();
+	}
+
 	/**
 	 * Show Merk list
 	 * @return void
 	 */
 	public function index()
 	{
+		$data['breadcrumb'] = $this->render_breadcrumb();
 		$sort = strtolower($this->input->get('sort')) == 'desc' ? 'desc' : 'asc';
 		$data['merks'] = $this->merk_model->get_all($sort);
 		$this->load->view('global/header', $data);
@@ -28,7 +40,7 @@ class Merk extends CI_Controller {
 	 */
 	public function tambah()
 	{
-		$data = [];
+		$data['breadcrumb'] = $this->render_breadcrumb('Tambah Merk', base_url('/merk/tambah'));
 		$this->form_validation->set_rules($this->merk_model->get_rules());
 
 		if($this->form_validation->run())
@@ -63,6 +75,7 @@ class Merk extends CI_Controller {
 	 */
 	public function ubah($id)
 	{
+		$data['breadcrumb'] = $this->render_breadcrumb('Ubah Merk', base_url('/merk/ubah'));
 		$this->form_validation->set_rules($this->merk_model->get_rules());
 
 		if($this->form_validation->run())

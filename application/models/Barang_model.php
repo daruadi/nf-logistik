@@ -16,7 +16,7 @@ class Barang_model extends CI_Model {
 			[
 				'field' => 'kode',
 				'label' => 'Kode',
-				'rules' => 'required|exact_length['.self::MAX_KODE_LENGTH.']',
+				'rules' => 'required|max_length['.self::MAX_KODE_LENGTH.']',
 			]
 		];
 	}

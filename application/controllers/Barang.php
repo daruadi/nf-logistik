@@ -9,12 +9,24 @@ class Barang extends CI_Controller {
 		$this->load->model('barang_model');
 	}
 
+	private function render_breadcrumb($page_name = '', $href = '')
+	{
+		$this->mybreadcrumb->add('Home', base_url());
+		$this->mybreadcrumb->add('Barang', base_url('/barang'));
+		if(!empty($page_name) && !empty($href)){
+			$this->mybreadcrumb->add($page_name, $href);
+		}
+
+		return $this->mybreadcrumb->render();
+	}
+
 	/**
 	 * [index description]
 	 * @return [type] [description]
 	 */
 	public function index()
 	{
+		$data['breadcrumb'] = $this->render_breadcrumb();
 		$sort = strtolower($this->input->get('sort')) == 'desc' ? 'desc' : 'asc';
 		$data['barangs'] = $this->barang_model->get_all($sort);
 		$this->load->view('global/header', $data);
@@ -28,7 +40,7 @@ class Barang extends CI_Controller {
 	 */
 	public function tambah()
 	{
-		$data = [];
+		$data['breadcrumb'] = $this->render_breadcrumb('Tambah Barang', base_url('/barang/tambah'));
 		$this->form_validation->set_rules($this->barang_model->get_rules());
 
 		if($this->form_validation->run())
@@ -63,6 +75,7 @@ class Barang extends CI_Controller {
 	 */
 	public function ubah($id)
 	{
+		$data['breadcrumb'] = $this->render_breadcrumb('Ubah Barang', base_url('/barang/ubah'));
 		$this->form_validation->set_rules($this->barang_model->get_rules());
 
 		if($this->form_validation->run())
