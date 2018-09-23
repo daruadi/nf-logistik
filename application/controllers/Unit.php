@@ -1,23 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Unit extends CI_Controller {
+class Unit extends MY_Controller {
 
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load->model('unit_model');
-	}
-
-	private function render_breadcrumb($page_name = '', $href = '')
-	{
-		$this->mybreadcrumb->add('Home', base_url());
-		$this->mybreadcrumb->add('Unit', base_url('/unit'));
-		if(!empty($page_name) && !empty($href)){
-			$this->mybreadcrumb->add($page_name, $href);
-		}
-
-		return $this->mybreadcrumb->render();
+		$this->breadcrumb_menu['Unit'] = base_url('/unit');
 	}
 
 	/**
@@ -26,8 +16,8 @@ class Unit extends CI_Controller {
 	 */
 	public function index()
 	{
+		$data['breadcrumb'] = $this->render_breadcrumb($this->breadcrumb_menu);
 		$sort = strtolower($this->input->get('sort')) == 'desc' ? 'desc' : 'asc';
-		$data['breadcrumb'] = $this->render_breadcrumb();
 		$data['units'] = $this->unit_model->get_all($sort);
 		$this->load->view('global/header', $data);
 		$this->load->view('unit/list');
@@ -40,7 +30,8 @@ class Unit extends CI_Controller {
 	 */
 	public function tambah()
 	{
-		$data['breadcrumb'] = $this->render_breadcrumb('Tambah Unit', base_url('/unit/tambah'));
+		$this->breadcrumb_menu['Tambah Unit'] = base_url('/unit/tambah');
+		$data['breadcrumb'] = $this->render_breadcrumb($this->breadcrumb_menu);
 
 		$this->form_validation->set_rules($this->unit_model->get_rules());
 
@@ -76,7 +67,8 @@ class Unit extends CI_Controller {
 	 */
 	public function ubah($id)
 	{
-		$data['breadcrumb'] = $this->render_breadcrumb('Ubah Unit', base_url('/unit/tambah'));
+		$this->breadcrumb_menu['Ubah Unit'] = base_url('/unit/ubah');
+		$data['breadcrumb'] = $this->render_breadcrumb($this->breadcrumb_menu);
 
 		$this->form_validation->set_rules($this->unit_model->get_rules());
 

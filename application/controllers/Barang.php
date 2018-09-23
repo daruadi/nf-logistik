@@ -1,23 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Barang extends CI_Controller {
+class Barang extends MY_Controller {
 
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load->model('barang_model');
-	}
-
-	private function render_breadcrumb($page_name = '', $href = '')
-	{
-		$this->mybreadcrumb->add('Home', base_url());
-		$this->mybreadcrumb->add('Barang', base_url('/barang'));
-		if(!empty($page_name) && !empty($href)){
-			$this->mybreadcrumb->add($page_name, $href);
-		}
-
-		return $this->mybreadcrumb->render();
+		$this->breadcrumb_menu['Barang'] = base_url('/barang');
 	}
 
 	/**
@@ -26,7 +16,7 @@ class Barang extends CI_Controller {
 	 */
 	public function index()
 	{
-		$data['breadcrumb'] = $this->render_breadcrumb();
+		$data['breadcrumb'] = $this->render_breadcrumb($this->breadcrumb_menu);
 		$sort = strtolower($this->input->get('sort')) == 'desc' ? 'desc' : 'asc';
 		$data['barangs'] = $this->barang_model->get_all($sort);
 		$this->load->view('global/header', $data);
@@ -40,7 +30,8 @@ class Barang extends CI_Controller {
 	 */
 	public function tambah()
 	{
-		$data['breadcrumb'] = $this->render_breadcrumb('Tambah Barang', base_url('/barang/tambah'));
+		$this->breadcrumb_menu['Tambah Barang'] = base_url('/barang/tambah');
+		$data['breadcrumb'] = $this->render_breadcrumb($this->breadcrumb_menu);
 		$this->form_validation->set_rules($this->barang_model->get_rules());
 
 		if($this->form_validation->run())
@@ -75,7 +66,8 @@ class Barang extends CI_Controller {
 	 */
 	public function ubah($id)
 	{
-		$data['breadcrumb'] = $this->render_breadcrumb('Ubah Barang', base_url('/barang/ubah'));
+		$this->breadcrumb_menu['Ubah Barang'] = base_url('/barang/ubah');
+		$data['breadcrumb'] = $this->render_breadcrumb($this->breadcrumb_menu);
 		$this->form_validation->set_rules($this->barang_model->get_rules());
 
 		if($this->form_validation->run())

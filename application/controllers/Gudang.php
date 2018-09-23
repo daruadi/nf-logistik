@@ -1,22 +1,12 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Gudang extends CI_Controller {
+class Gudang extends MY_Controller {
 
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load->model('gudang_model');
-	}
-
-	private function render_breadcrumb($page_name = '', $href = '')
-	{
-		$this->mybreadcrumb->add('Home', base_url());
-		$this->mybreadcrumb->add('Gudang', base_url('/gudang'));
-		if(!empty($page_name) && !empty($href)){
-			$this->mybreadcrumb->add($page_name, $href);
-		}
-
-		return $this->mybreadcrumb->render();
+		$this->breadcrumb_menu['Gudang'] = base_url('/gudang');
 	}
 
 	/**
@@ -25,7 +15,7 @@ class Gudang extends CI_Controller {
 	 */
 	public function index()
 	{
-		$data['breadcrumb'] = $this->render_breadcrumb();
+		$data['breadcrumb'] = $this->render_breadcrumb($this->breadcrumb_menu);
 		$sort = strtolower($this->input->get('sort')) == 'desc' ? 'desc' : 'asc';
 		$data['gudangs'] = $this->gudang_model->get_all($sort);
 		$this->load->view('global/header', $data);
@@ -39,7 +29,8 @@ class Gudang extends CI_Controller {
 	 */
 	public function tambah()
 	{
-		$data['breadcrumb'] = $this->render_breadcrumb('Tambah Gudang', base_url('/gudang/tambah'));
+		$this->breadcrumb_menu['Tambah Gudang'] = base_url('/gudang/tambah');
+		$data['breadcrumb'] = $this->render_breadcrumb($this->breadcrumb_menu);
 		$this->form_validation->set_rules($this->gudang_model->get_rules());
 
 		if($this->form_validation->run())
@@ -75,7 +66,8 @@ class Gudang extends CI_Controller {
 	 */
 	public function ubah($id)
 	{
-		$data['breadcrumb'] = $this->render_breadcrumb('Ubah Gudang', base_url('/gudang/ubah'));
+		$this->breadcrumb_menu['Ubah Gudang'] = base_url('/gudang/ubah');
+		$data['breadcrumb'] = $this->render_breadcrumb($this->breadcrumb_menu);
 		$this->form_validation->set_rules($this->gudang_model->get_rules());
 
 		if($this->form_validation->run())

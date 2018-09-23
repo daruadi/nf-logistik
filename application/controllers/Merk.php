@@ -1,23 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Merk extends CI_Controller {
+class Merk extends MY_Controller {
 
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load->model('merk_model');
-	}
-
-	private function render_breadcrumb($page_name = '', $href = '')
-	{
-		$this->mybreadcrumb->add('Home', base_url());
-		$this->mybreadcrumb->add('Merk', base_url('/merk'));
-		if(!empty($page_name) && !empty($href)){
-			$this->mybreadcrumb->add($page_name, $href);
-		}
-
-		return $this->mybreadcrumb->render();
+		$this->breadcrumb_menu['Merk'] = base_url('/merk');
 	}
 
 	/**
@@ -26,7 +16,7 @@ class Merk extends CI_Controller {
 	 */
 	public function index()
 	{
-		$data['breadcrumb'] = $this->render_breadcrumb();
+		$data['breadcrumb'] = $this->render_breadcrumb($this->breadcrumb_menu);
 		$sort = strtolower($this->input->get('sort')) == 'desc' ? 'desc' : 'asc';
 		$data['merks'] = $this->merk_model->get_all($sort);
 		$this->load->view('global/header', $data);
@@ -40,7 +30,8 @@ class Merk extends CI_Controller {
 	 */
 	public function tambah()
 	{
-		$data['breadcrumb'] = $this->render_breadcrumb('Tambah Merk', base_url('/merk/tambah'));
+		$this->breadcrumb_menu['Tambah Merk'] = base_url('/merk/tambah');
+		$data['breadcrumb'] = $this->render_breadcrumb($this->breadcrumb_menu);
 		$this->form_validation->set_rules($this->merk_model->get_rules());
 
 		if($this->form_validation->run())
@@ -75,7 +66,8 @@ class Merk extends CI_Controller {
 	 */
 	public function ubah($id)
 	{
-		$data['breadcrumb'] = $this->render_breadcrumb('Ubah Merk', base_url('/merk/ubah'));
+		$this->breadcrumb_menu['Ubah Merk'] = base_url('/merk/ubah');
+		$data['breadcrumb'] = $this->render_breadcrumb($this->breadcrumb_menu);
 		$this->form_validation->set_rules($this->merk_model->get_rules());
 
 		if($this->form_validation->run())
