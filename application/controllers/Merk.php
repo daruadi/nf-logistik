@@ -10,8 +10,8 @@ class Merk extends CI_Controller {
 	}
 
 	/**
-	 * [index description]
-	 * @return [type] [description]
+	 * Show Merk list
+	 * @return void
 	 */
 	public function index()
 	{
@@ -28,14 +28,14 @@ class Merk extends CI_Controller {
 	 */
 	public function tambah()
 	{
-		$data['max_name_length'] = Merk_model::MAX_NAME_LENGTH;
-
+		$data = [];
 		$this->form_validation->set_rules($this->merk_model->get_rules());
 
 		if($this->form_validation->run())
 		{
 			$nama = $this->input->post('nama');
-			$inserted = $this->merk_model->insert($nama);
+			$kode = $this->input->post('kode');
+			$inserted = $this->merk_model->insert($nama, $kode);
 			if($inserted > 0)
 			{
 				redirect('merk/?sort=desc');
@@ -69,7 +69,8 @@ class Merk extends CI_Controller {
 		{
 			$id = intval($this->input->post('id'));
 			$nama = $this->input->post('nama');
-			$updated = $this->merk_model->update($id, $nama);
+			$kode = $this->input->post('kode');
+			$updated = $this->merk_model->update($id, $nama, $kode);
 			
 			if($updated > 0)
 			{
@@ -93,7 +94,6 @@ class Merk extends CI_Controller {
 			}
 			else
 			{
-				$data['max_name_length'] = Merk_model::MAX_NAME_LENGTH;
 				$view = 'merk/form';
 			}
 		}

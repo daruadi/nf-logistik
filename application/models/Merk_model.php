@@ -2,7 +2,10 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Merk_model extends CI_Model {
-	const MAX_NAME_LENGTH = 100;
+	const MAX_NAMA_LENGTH = 100;
+	const MAX_KODE_LENGTH = 3;
+
+	public $prefix_id = 'MK';
 
 	public function get_rules()
 	{
@@ -10,7 +13,12 @@ class Merk_model extends CI_Model {
 			[
 				'field' => 'nama',
 				'label' => 'Nama',
-				'rules' => 'required|min_length[3]|max_length['.self::MAX_NAME_LENGTH.']',
+				'rules' => 'required|min_length[3]|max_length['.self::MAX_NAMA_LENGTH.']',
+			],
+			[
+				'field' => 'kode',
+				'label' => 'Kode',
+				'rules' => 'required|exact_length['.self::MAX_KODE_LENGTH.']',
 			]
 		];
 	}
@@ -27,10 +35,11 @@ class Merk_model extends CI_Model {
 		return $query->result();
 	}
 
-	public function insert($name)
+	public function insert($nama, $kode)
 	{
 		$data = [
-			'nama' => $name,
+			'nama' => $nama,
+			'kode' => strtoupper($kode),
 		];
 
 		$this->db->insert('merk', $data);
@@ -49,9 +58,10 @@ class Merk_model extends CI_Model {
 		return $this->db->affected_rows();
 	}
 
-	public function update($id, $name)
+	public function update($id, $nama, $kode)
 	{
-		$this->db->set('nama', $name);
+		$this->db->set('nama', $nama);
+		$this->db->set('kode', strtoupper($kode));
 		$this->db->where('id', intval($id));
 		$this->db->update('merk');
 
