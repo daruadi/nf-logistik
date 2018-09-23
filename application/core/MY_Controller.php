@@ -7,6 +7,7 @@ class MY_Controller extends CI_Controller {
 		if(empty($pages))
 			return;
 
+		$this->load->library('mybreadcrumb');
 		$this->mybreadcrumb->add('Home', base_url());
 		foreach ($pages as $page_name => $url) {
 			$this->mybreadcrumb->add($page_name, $url);
