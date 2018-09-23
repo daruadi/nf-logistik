@@ -1,12 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Barang extends CI_Controller {
+class Barang extends MY_Controller {
 
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load->model('barang_model');
+		$this->breadcrumb_menu['Barang'] = base_url('/barang');
 	}
 
 	/**
@@ -15,6 +16,7 @@ class Barang extends CI_Controller {
 	 */
 	public function index()
 	{
+		$data['breadcrumb'] = $this->render_breadcrumb($this->breadcrumb_menu);
 		$sort = strtolower($this->input->get('sort')) == 'desc' ? 'desc' : 'asc';
 		$data['barangs'] = $this->barang_model->get_all($sort);
 		$this->load->view('global/header', $data);
@@ -28,14 +30,15 @@ class Barang extends CI_Controller {
 	 */
 	public function tambah()
 	{
-		$data['max_name_length'] = barang_model::MAX_NAME_LENGTH;
-
+		$this->breadcrumb_menu['Tambah Barang'] = base_url('/barang/tambah');
+		$data['breadcrumb'] = $this->render_breadcrumb($this->breadcrumb_menu);
 		$this->form_validation->set_rules($this->barang_model->get_rules());
 
 		if($this->form_validation->run())
 		{
 			$nama = $this->input->post('nama');
-			$inserted = $this->barang_model->insert($nama);
+			$kode = $this->input->post('kode');
+			$inserted = $this->barang_model->insert($nama, $kode);
 			if($inserted > 0)
 			{
 				redirect('barang/?sort=desc');
@@ -63,13 +66,16 @@ class Barang extends CI_Controller {
 	 */
 	public function ubah($id)
 	{
+		$this->breadcrumb_menu['Ubah Barang'] = base_url('/barang/ubah');
+		$data['breadcrumb'] = $this->render_breadcrumb($this->breadcrumb_menu);
 		$this->form_validation->set_rules($this->barang_model->get_rules());
 
 		if($this->form_validation->run())
 		{
 			$id = intval($this->input->post('id'));
 			$nama = $this->input->post('nama');
-			$updated = $this->barang_model->update($id, $nama);
+			$kode = $this->input->post('kode');
+			$updated = $this->barang_model->update($id, $nama, $kode);
 			
 			if($updated > 0)
 			{
@@ -93,7 +99,6 @@ class Barang extends CI_Controller {
 			}
 			else
 			{
-				$data['max_name_length'] = barang_model::MAX_NAME_LENGTH;
 				$view = 'barang/form';
 			}
 		}

@@ -1,3 +1,4 @@
+<?php echo $breadcrumb; ?>
 <div class="card-header">
 	<i class="fa fa-table"></i>
 	<?php
@@ -14,20 +15,26 @@
 			echo form_hidden('id', $gudang->id);
 		}
 		$nama = set_value('nama');
-		$nama = isset($gudang) ? $gudang->nama : $nama;
-
 		$alamat = set_value('alamat');
-		$alamat = isset($gudang) ? $gudang->alamat : $alamat;
+		$kode = set_value('kode');
+		$nama = isset($gudang->nama) ? $gudang->nama : $nama;
+		$alamat = isset($gudang->alamat) ? $gudang->alamat : $alamat;
+		$kode = isset($gudang->kode) ? $gudang->kode : $kode;
 		?>
 		<div class="form-group">
 			<?php echo form_label('Nama', 'nama');?>
-			<?php echo form_input('nama', $nama, ['class'=>'form-control', 'id'=>'nama', 'placeholder'=>'Nama gudang', 'maxlength'=>$max_name_length]);?>
+			<?php echo form_input('nama', $nama, ['class'=>'form-control', 'id'=>'nama', 'placeholder'=>'Nama Gudang', 'maxlength'=>gudang_model::MAX_NAMA_LENGTH]);?>
 			<?php echo form_error('nama', '<span class="alert-danger col-md-3">', '</span>'); ?>
 		</div>
 		<div class="form-group">
 			<?php echo form_label('Alamat', 'alamat');?>
-			<?php echo form_textarea('alamat', $alamat, ['class'=>'form-control', 'id'=>'alamat', 'placeholder'=>'Alamat lengkap', 'maxlength'=>$max_address_length]);?>
+			<?php echo form_textarea('alamat', $alamat, ['class'=>'form-control', 'id'=>'alamat', 'placeholder'=>'Alamat Lengkap', 'maxlength'=>gudang_model::MAX_ADDRESS_LENGTH]);?>
 			<?php echo form_error('alamat', '<span class="alert-danger col-md-3">', '</span>'); ?>
+		</div>
+		<div class="form-group">
+			<?php echo form_label('Kode', 'kode');?>
+			<?php echo form_input('kode', $kode, ['class'=>'form-control', 'id'=>'kode', 'placeholder'=>'Kode Gudang', 'maxlength'=>gudang_model::MAX_KODE_LENGTH]);?>
+			<?php echo form_error('kode', '<span class="alert-danger col-md-3">', '</span>'); ?>
 		</div>
 		<?php echo form_submit('simpan', 'Simpan', ['class'=>'btn btn-primary']);?>
 	<?php echo form_close();?>

@@ -1,20 +1,22 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Merk extends CI_Controller {
+class Merk extends MY_Controller {
 
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load->model('merk_model');
+		$this->breadcrumb_menu['Merk'] = base_url('/merk');
 	}
 
 	/**
-	 * [index description]
-	 * @return [type] [description]
+	 * Show Merk list
+	 * @return void
 	 */
 	public function index()
 	{
+		$data['breadcrumb'] = $this->render_breadcrumb($this->breadcrumb_menu);
 		$sort = strtolower($this->input->get('sort')) == 'desc' ? 'desc' : 'asc';
 		$data['merks'] = $this->merk_model->get_all($sort);
 		$this->load->view('global/header', $data);
@@ -28,14 +30,15 @@ class Merk extends CI_Controller {
 	 */
 	public function tambah()
 	{
-		$data['max_name_length'] = Merk_model::MAX_NAME_LENGTH;
-
+		$this->breadcrumb_menu['Tambah Merk'] = base_url('/merk/tambah');
+		$data['breadcrumb'] = $this->render_breadcrumb($this->breadcrumb_menu);
 		$this->form_validation->set_rules($this->merk_model->get_rules());
 
 		if($this->form_validation->run())
 		{
 			$nama = $this->input->post('nama');
-			$inserted = $this->merk_model->insert($nama);
+			$kode = $this->input->post('kode');
+			$inserted = $this->merk_model->insert($nama, $kode);
 			if($inserted > 0)
 			{
 				redirect('merk/?sort=desc');
@@ -63,13 +66,16 @@ class Merk extends CI_Controller {
 	 */
 	public function ubah($id)
 	{
+		$this->breadcrumb_menu['Ubah Merk'] = base_url('/merk/ubah');
+		$data['breadcrumb'] = $this->render_breadcrumb($this->breadcrumb_menu);
 		$this->form_validation->set_rules($this->merk_model->get_rules());
 
 		if($this->form_validation->run())
 		{
 			$id = intval($this->input->post('id'));
 			$nama = $this->input->post('nama');
-			$updated = $this->merk_model->update($id, $nama);
+			$kode = $this->input->post('kode');
+			$updated = $this->merk_model->update($id, $nama, $kode);
 			
 			if($updated > 0)
 			{
@@ -93,7 +99,6 @@ class Merk extends CI_Controller {
 			}
 			else
 			{
-				$data['max_name_length'] = Merk_model::MAX_NAME_LENGTH;
 				$view = 'merk/form';
 			}
 		}
