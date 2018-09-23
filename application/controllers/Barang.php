@@ -28,14 +28,14 @@ class Barang extends CI_Controller {
 	 */
 	public function tambah()
 	{
-		$data['max_name_length'] = barang_model::MAX_NAME_LENGTH;
-
+		$data = [];
 		$this->form_validation->set_rules($this->barang_model->get_rules());
 
 		if($this->form_validation->run())
 		{
 			$nama = $this->input->post('nama');
-			$inserted = $this->barang_model->insert($nama);
+			$kode = $this->input->post('kode');
+			$inserted = $this->barang_model->insert($nama, $kode);
 			if($inserted > 0)
 			{
 				redirect('barang/?sort=desc');
@@ -69,7 +69,8 @@ class Barang extends CI_Controller {
 		{
 			$id = intval($this->input->post('id'));
 			$nama = $this->input->post('nama');
-			$updated = $this->barang_model->update($id, $nama);
+			$kode = $this->input->post('kode');
+			$updated = $this->barang_model->update($id, $nama, $kode);
 			
 			if($updated > 0)
 			{
@@ -93,7 +94,6 @@ class Barang extends CI_Controller {
 			}
 			else
 			{
-				$data['max_name_length'] = barang_model::MAX_NAME_LENGTH;
 				$view = 'barang/form';
 			}
 		}
