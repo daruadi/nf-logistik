@@ -17,12 +17,12 @@
           <span class="nav-link-text">Charts</span>
         </a>
       </li> -->
-      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Data Acuan">
-        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseDataAcuan" data-parent="#exampleAccordion">
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Data Rujukan">
+        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseDataRujukan" data-parent="#exampleAccordion">
           <i class="fa fa-fw fa-archive"></i>
-          <span class="nav-link-text">Data Acuan</span>
+          <span class="nav-link-text">Data Rujukan</span>
         </a>
-        <ul class="sidenav-second-level collapse" id="collapseDataAcuan">
+        <ul class="sidenav-second-level collapse" id="collapseDataRujukan">
           <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Barang">
             <a class="nav-link" href="<?php echo base_url();?>barang">
               <i class="fa fa-fw fa-gift"></i>
