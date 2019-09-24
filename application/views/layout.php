@@ -7,7 +7,6 @@
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 	<link rel="stylesheet" href="<?php echo base_url();?>assets/admin_lte/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="<?php echo base_url();?>assets/admin_lte/font-awesome/css/font-awesome.min.css">
-	<link rel="stylesheet" href="<?php echo base_url();?>assets/admin_lte/Ionicons/css/ionicons.min.css">
 	<link rel="stylesheet" href="<?php echo base_url();?>assets/admin_lte/dist/css/AdminLTE.min.css">
 	<link rel="stylesheet" href="<?php echo base_url();?>assets/admin_lte/dist/css/skins/skin-blue.min.css">
 </head>
