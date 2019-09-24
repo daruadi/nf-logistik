@@ -16,7 +16,6 @@ class Barang extends MY_Controller {
 	 */
 	public function index()
 	{
-		$data['breadcrumb'] = $this->render_breadcrumb($this->breadcrumb_menu);
 		$sort = strtolower($this->input->get('sort')) == 'desc' ? 'desc' : 'asc';
 		$data['barangs'] = $this->barang_model->get_all($sort);
 		$this->load->view('global/header', $data);
@@ -30,8 +29,7 @@ class Barang extends MY_Controller {
 	 */
 	public function tambah()
 	{
-		$this->breadcrumb_menu['Tambah Barang'] = base_url('/barang/tambah');
-		$data['breadcrumb'] = $this->render_breadcrumb($this->breadcrumb_menu);
+		$data = array();
 		$this->form_validation->set_rules($this->barang_model->get_rules());
 
 		if($this->form_validation->run())
@@ -66,8 +64,6 @@ class Barang extends MY_Controller {
 	 */
 	public function ubah($id)
 	{
-		$this->breadcrumb_menu['Ubah Barang'] = base_url('/barang/ubah');
-		$data['breadcrumb'] = $this->render_breadcrumb($this->breadcrumb_menu);
 		$this->form_validation->set_rules($this->barang_model->get_rules());
 
 		if($this->form_validation->run())
