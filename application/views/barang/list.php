@@ -9,10 +9,9 @@
 				<a href="<?php echo base_url();?>barang/tambah/" class="btn btn-block btn-primary">Tambah</a>
 			</div>
 		</div>
-		<table class="table table-hover">
+		<table class="table table-hover table-bordered">
 			<thead>
 				<tr>
-					<th>ID</th>
 					<th>Nama</th>
 					<th>Kode</th>
 					<th>Action</th>
@@ -20,7 +19,6 @@
 			</thead>
 			<tfoot>
 				<tr>
-					<th>ID</th>
 					<th>Nama</th>
 					<th>Kode</th>
 					<th>Action</th>
@@ -29,7 +27,6 @@
 			<tbody>
 				<?php foreach($barangs as $key => $value): ?>
 				<tr>
-					<td><?php echo $value->id;?></td>
 					<td><?php echo $value->nama;?></td>
 					<td><?php echo !empty($value->kode) ? $value->kode : '<i>(not set)</i>';?></td>
 					<td>

@@ -10,6 +10,7 @@
 		<?php
 		if(isset($barang))
 		{
+			$barang = array_pop($barang);
 			echo form_hidden('id', $barang->id);
 		}
 		$nama = set_value('nama');
