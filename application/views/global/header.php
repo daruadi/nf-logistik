@@ -1,32 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <title>NF Logistik</title>
-  <!-- Bootstrap core CSS-->
-  <link href="<?php echo base_url();?>assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Custom fonts for this template-->
-  <link href="<?php echo base_url();?>assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-  <!-- Page level plugin CSS-->
-  <link href="<?php echo base_url();?>assets/datatables/dataTables.bootstrap4.css" rel="stylesheet">
-  <!-- Custom styles for this template-->
-  <link href="<?php echo base_url();?>assets/sb-admin/css/sb-admin.css" rel="stylesheet">
-  <!-- bootstrap select -->
-  <link href="<?php echo base_url();?>assets/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet">
-  <!-- bootstrap datepicker -->
-  <link href="<?php echo base_url();?>assets/datepicker/css/datepicker.css" rel="stylesheet">
-  <!-- Bootstrap core JavaScript-->
-  <script src="<?php echo base_url();?>assets/jquery/jquery.min.js"></script>
-  <script src="<?php echo base_url();?>assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <title>NF Admin</title>
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link rel="stylesheet" href="<?php echo base_url();?>assets/admin_lte/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="<?php echo base_url();?>assets/admin_lte/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="<?php echo base_url();?>assets/admin_lte/dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="<?php echo base_url();?>assets/admin_lte/dist/css/skins/skin-blue.min.css">
 </head>
-
-<body class="fixed-nav sticky-footer bg-dark" id="page-top">
-  <?php isset($hide_nav) && $hide_nav == TRUE ? '' : include('navigation.php'); ?>
-  <div class="content-wrapper">
-    <div class="container-fluid">
-      <div class="card mb-3">
+<body class="hold-transition skin-blue layout-boxed sidebar-mini">
+  <div class="wrapper">
+    <header class="main-header">
+      <a href="<?php echo base_url();?>" class="logo">
+        <span class="logo-mini"><b>NF</b>L</span>
+        <span class="logo-lg"><b>NF</b>Logistik</span>
+      </a>
+      <nav class="navbar navbar-static-top">
+        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+          <span class="sr-only">Toggle navigation</span>
+        </a>
+        <div class="navbar-custom-menu">
+          <ul class="nav navbar-nav">
+            <li class="dropdown user user-menu">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <i class="fa fa-male"></i>
+                <span class="hidden-xs">Pintoko</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <?php include('main_sidebar.php');?>
+    <div class="content-wrapper">

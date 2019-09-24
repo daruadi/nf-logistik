@@ -1,17 +1,16 @@
-<?php echo $breadcrumb; ?>
-<div class="card-header">
-	<i class="fa fa-table"></i>
-	<?php
-	$barang = isset($barang) ? array_pop($barang) : null;
-	$action = isset($barang) ? 'ubah' : 'tambah';
-	?>
-	<?php echo ucfirst($action); ?> Barang
-</div>
-<div class="card-body">
+<?php
+	$content_header['page_name'] = 'Form Input Barang';
+	$content_header['page_description'] = 'Pengkodean barang sesuai jenisnya';
+	$this->load->view('global/content_header', $content_header);
+	$gudang = isset($gudang) ? array_pop($gudang) : null;
+	$action = isset($gudang) ? 'ubah' : 'tambah';
+?>
+<section class="content">
 	<?php echo form_open('barang/'.$action.(isset($id) ? '/'.$id : ''));?>
 		<?php
 		if(isset($barang))
 		{
+			$barang = array_pop($barang);
 			echo form_hidden('id', $barang->id);
 		}
 		$nama = set_value('nama');
@@ -31,4 +30,4 @@
 		</div>
 		<?php echo form_submit('simpan', 'Simpan', ['class'=>'btn btn-primary']);?>
 	<?php echo form_close();?>
-</div>
+</section>
