@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 23, 2018 at 02:23 AM
+-- Generation Time: Sep 23, 2018 at 04:01 PM
 -- Server version: 10.1.32-MariaDB
 -- PHP Version: 5.6.36
 
@@ -30,7 +30,8 @@ SET time_zone = "+07:00";
 
 CREATE TABLE `barang` (
   `id` int(11) NOT NULL,
-  `nama` varchar(100) NOT NULL
+  `nama` varchar(100) NOT NULL,
+  `kode` varchar(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -42,7 +43,8 @@ CREATE TABLE `barang` (
 CREATE TABLE `gudang` (
   `id` int(11) NOT NULL,
   `nama` varchar(100) NOT NULL,
-  `alamat` varchar(500) NOT NULL
+  `alamat` varchar(500) NOT NULL,
+  `kode` varchar(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -67,7 +69,8 @@ CREATE TABLE `harga` (
 
 CREATE TABLE `merk` (
   `id` int(11) NOT NULL,
-  `nama` varchar(100) NOT NULL
+  `nama` varchar(100) NOT NULL,
+  `kode` varchar(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -105,7 +108,8 @@ CREATE TABLE `stok` (
 
 CREATE TABLE `unit` (
   `id` int(11) NOT NULL,
-  `nama` varchar(100) NOT NULL
+  `nama` varchar(100) NOT NULL,
+  `kode` varchar(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
